@@ -1,18 +1,22 @@
 
 
 import './index.css'
-import React from 'react'
-import { Button } from './components/ui/button'
+import Header from './components/Header'
+import Home from './Pages/Home'
+import Compiler from './Pages/Compiler'
+import NotFound from './Pages/NotFound'
+import { Routes,Route } from 'react-router-dom'
 function App() {
   
 
   return (
     <>
-      <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white p-5 rounded-lg">
-        Hello World
-      </h1>
-      <Button variant={'default'}>Click me am a button</Button>
-       
+      <Header />
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/compiler" element={<Compiler />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   )
 }

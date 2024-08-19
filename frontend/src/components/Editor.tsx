@@ -3,7 +3,7 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
   } from "../components/ui/resizable";
-  
+  import CodeEditor from "../components/CodeEditor";
   export default function Editor() {
     return (
       <ResizablePanelGroup
@@ -13,11 +13,13 @@ import {
         {/* Left side - Code Editors */}
         <ResizablePanel defaultSize={50} className="min-w-[250px]">
           <ResizablePanelGroup direction="vertical" className="h-full">
-            <ResizablePanel defaultSize={33.33}>
-              <div className="flex text-white h-full items-center justify-center p-6 border-b">
-                <span className="font-semibold">Editor One</span>
-              </div>
-            </ResizablePanel>
+          <ResizablePanel defaultSize={33.33}>
+  <div className="flex text-white h-full items-center justify-center p-6 border-b">
+    <div className="w-full h-full"> {/* Add this wrapper */}
+      <CodeEditor />
+    </div>
+  </div>
+</ResizablePanel>
             <ResizableHandle />
             <ResizablePanel defaultSize={33.33}>
               <div className="flex h-full text-white items-center justify-center p-6 border-b">

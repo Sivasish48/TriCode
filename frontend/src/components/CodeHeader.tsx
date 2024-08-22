@@ -1,5 +1,13 @@
 import React from 'react'
 import { Button } from "./ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select"
+
 
 function CodeHeader() {
   return (
@@ -20,6 +28,21 @@ function CodeHeader() {
         <ShareIcon className="w-5 h-5 mr-2" />
         <span>Share</span>
       </Button>
+      <div>
+      <Select>
+  <SelectTrigger className="w-[180px] bg-dark text-white">
+    <SelectValue placeholder="Select a language" />
+  </SelectTrigger>
+  <SelectContent className='bg-dark text-white'>
+    <SelectItem value="light" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>html</SelectItem>
+    <SelectItem value="dark" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>css</SelectItem>
+    <SelectItem value="system" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>js</SelectItem>
+  </SelectContent>
+</Select>
+      </div>
+      <div>
+
+      </div>
     </div>
   </div>
   )

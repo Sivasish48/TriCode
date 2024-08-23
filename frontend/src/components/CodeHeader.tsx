@@ -7,9 +7,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select"
+import { useDispatch } from 'react-redux'
+import { updateCurrentLanguage } from '../redux/slices/CompilerSlice'
 
 
 function CodeHeader() {
+  const dispatch = useDispatch()
   return (
     <div className='h-[50px] bg-transparent text-white flex justify-end items-center px-4'>
     <div className="flex items-center gap-4">
@@ -29,15 +32,19 @@ function CodeHeader() {
         <span>Share</span>
       </Button>
       <div>
-      <Select>
-  <SelectTrigger className="w-[180px] bg-dark text-white">
+
+      <Select onValueChange={((value)=>{
+        dispatch(updateCurrentLanguage(value))
+      })}>
+     
+     <SelectTrigger className="w-[180px] bg-dark text-white">
     <SelectValue placeholder="Select a language" />
   </SelectTrigger>
   <SelectContent className='bg-dark text-white'>
-    <SelectItem value="light" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>html</SelectItem>
-    <SelectItem value="dark" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>css</SelectItem>
-    <SelectItem value="system" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>js</SelectItem>
-  </SelectContent>
+    <SelectItem value="html" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>HTML</SelectItem>
+    <SelectItem value="css" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>CSS</SelectItem>
+    <SelectItem value="javascript" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>JS</SelectItem>
+  </SelectContent > 
 </Select>
       </div>
       <div>

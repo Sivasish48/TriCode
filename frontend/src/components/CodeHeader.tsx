@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Button } from "./ui/button"
 import {
   Select,
@@ -7,12 +7,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateCurrentLanguage } from '../redux/slices/CompilerSlice'
-
+import { RootState } from '../redux/store'
+import { compilerSliceStateType } from '../redux/slices/CompilerSlice'
 
 function CodeHeader() {
   const dispatch = useDispatch()
+  const currentLanguage = useSelector((state:RootState)=>state.compilerSlice.currentLanguage)
+
   return (
     <div className='h-[50px] bg-transparent text-white flex justify-end items-center px-4'>
     <div className="flex items-center gap-4">
@@ -33,8 +36,10 @@ function CodeHeader() {
       </Button>
       <div>
 
-      <Select onValueChange={((value)=>{
-        dispatch(updateCurrentLanguage(value))
+      <Select 
+      defaultValue={currentLanguage}
+      onValueChange={((value)=>{ 
+        dispatch(updateCurrentLanguage(value as compilerSliceStateType["currentLanguage"]))
       })}>
      
      <SelectTrigger className="w-[180px] bg-dark text-white">
@@ -43,7 +48,7 @@ function CodeHeader() {
   <SelectContent className='bg-dark text-white'>
     <SelectItem value="html" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>HTML</SelectItem>
     <SelectItem value="css" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>CSS</SelectItem>
-    <SelectItem value="javascript" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>JS</SelectItem>
+    <SelectItem value="javascript" className='bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white'>JAVASCRIPT</SelectItem>
   </SelectContent > 
 </Select>
       </div>

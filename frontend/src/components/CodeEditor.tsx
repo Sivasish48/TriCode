@@ -1,31 +1,43 @@
-import React from 'react';
-import CodeMirror from '@uiw/react-codemirror';
-import { tokyoNightInit } from '@uiw/codemirror-theme-tokyo-night';
-import { loadLanguage, langNames } from '@uiw/codemirror-extensions-langs';
+import React from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { tokyoNightInit } from "@uiw/codemirror-theme-tokyo-night";
+import { loadLanguage, langNames } from "@uiw/codemirror-extensions-langs";
 import { tags as t } from "@lezer/highlight";
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+import {
+  updateCodevalue,
+  
+} from "../redux/slices/CompilerSlice.ts";
 
 export default function CodeEditor() {
+  const dispatch = useDispatch();
   console.log("Available Languages: ", langNames);
 
-  const [value, setValue] = React.useState("console.log('hello world!');");
+  //const [value, setValue] = React.useState("console.log('hello world!');");
 
-  const onChange = React.useCallback((val: string) => {
-    console.log("Code Value: ", val);
-    setValue(val);
+
+  const currentLanguage = useSelector(
+    (state: RootState) => state.compilerSlice.currentLanguage
+  );
+
+   const fullCode = useSelector((state: RootState) => state.compilerSlice.fullCode);
+
+
+  const onChange = React.useCallback((value: string) => {
+    // console.log("Code Value: ", val);
+    // setValue(val);
+    dispatch(updateCodevalue(value));
   }, []);
 
-  const currentLanguage = useSelector((state: RootState) => state.compilerSlice.currentLanguage);
-
-  // Load the language extension based on the current language
-  const languageExtension = loadLanguage(currentLanguage);
+ 
+  // const languageExtension = loadLanguage(currentLanguage);
 
   return (
     <CodeMirror
-      value={value}
-      height="100vh"
-      extensions={languageExtension ? [languageExtension] : []}
+      value={fullCode[currentLanguage]}
+      height="calc(100vh - 60px - 50px)"
+      extensions={[loadLanguage(currentLanguage)!]}
       onChange={onChange}
       theme={tokyoNightInit({
         settings: {

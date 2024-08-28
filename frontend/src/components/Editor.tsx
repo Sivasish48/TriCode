@@ -7,6 +7,8 @@ import {
 import CodeHeader from "./CodeHeader";
 import CodeEditor from "../components/CodeEditor";
 
+import RenderCode from "./RenderCode.tsx";
+
 export default function Editor() {
   return (
     <ResizablePanelGroup
@@ -30,9 +32,7 @@ export default function Editor() {
 
     {/* Right side - Output */}
     <ResizablePanel defaultSize={50} className="min-w-[250px] bg-black">
-      <div className="flex h-full text-white items-center justify-center p-6">
-        <span className="font-semibold">Output</span>
-      </div>
+    <RenderCode />
     </ResizablePanel>
   </ResizablePanelGroup>
   );

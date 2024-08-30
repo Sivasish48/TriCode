@@ -11,8 +11,9 @@ export default function RenderCode() {
   const iframeCode = `data:text/html;charset=utf-8,${encodeURIComponent(combinedCode)}`;
 
   return (
+    
     <div className="bg-white h-[calc(100dvh-60px)]">
-      <iframe className="w-full h-full" src={iframeCode} />
+      <iframe className="w-full h-full" src={iframeCode}/>
     </div>
   );
 }

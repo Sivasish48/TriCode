@@ -1,34 +1,61 @@
-import React from "react";
-import { Spotlight } from "../components/ui/spotlight";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Spotlight } from '../components/ui/spotlight';
+import MagicButton from '../components/ui/Magicbutton';
 
-export default function Landing() {
+
+const Landing: React.FC = () => {
   return (
-    <div className="h-screen w-full bg-gradient-to-br from-blue-900 to-black overflow-hidden relative">
-      <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20"
-        fill="white"
-      />
+    <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-gray-900 via-black to-black">
+
+      
+      
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-blue-900/50" />
+
       <nav className="absolute top-0 left-0 right-0 p-4 z-20">
         <ul className="flex justify-center space-x-6 text-white">
-          <li><a href="#about" className="hover:text-purple-300">About</a></li>
-          <li><a href="#projects" className="hover:text-purple-300">Projects</a></li>
-          <li><a href="#testimonials" className="hover:text-purple-300">Testimonials</a></li>
-          <li><a href="#contact" className="hover:text-purple-300">Contact</a></li>
+          {['About', 'Testimonials', 'Contact'].map((item) => (
+            <motion.li key={item} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <a href={`#${item.toLowerCase()}`} className="hover:text-purple-300 transition-colors">{item}</a>
+            </motion.li>
+          ))}
         </ul>
       </nav>
+      
       <div className="flex flex-col items-center justify-center h-full text-center px-4 relative z-10">
-        <p className="text-purple-300 mb-2">DYNAMIC WEB MAGIC WITH NEXT.JS</p>
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+        
+        <motion.p 
+          className="text-purple-300 mb-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <Spotlight className='bg-blue h-50'/>
+          DYNAMIC WEB MAGIC WITH NEXT.JS
+        </motion.p>
+        <motion.h1 
+          className="text-4xl md:text-6xl font-bold text-white mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
           Transforming Concepts into<br />
           Seamless <span className="text-purple-300">User Experiences</span>
-        </h1>
-        <p className="text-white mb-8">
+        </motion.h1>
+        <motion.p 
+          className="text-white mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
           Hi! I'm Adrian, a Next.js Developer based in Croatia.
-        </p>
-        <button className="bg-white text-blue-900 px-6 py-2 rounded-full hover:bg-purple-300 transition duration-300">
-          Show my work ➔
-        </button>
+        </motion.p>
+       
+          <MagicButton title="Show my work" icon={<span className="text-white">➔</span>} position="left" />
+        
       </div>
     </div>
   );
-}
+};
+
+export default Landing;

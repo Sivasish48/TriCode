@@ -5,7 +5,7 @@ import MagicButton from '../components/ui/Magicbutton';
 import { HeroParallax } from '../components/HeroParallax';
 const Landing: React.FC = () => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-gray-900 via-black to-black">
+    <div className="relative min-h-screen w-full overflow-hidden bg-black">
     <div className="absolute inset-0 bg-gradient-radial from-transparent to-blue-900/50" />
   
     <nav className="absolute top-0 left-0 right-0 p-4 z-20">
@@ -35,7 +35,7 @@ const Landing: React.FC = () => {
         transition={{ delay: 0.1, type: 'spring', stiffness: 200 }}
       >
         Master the Art of Code <br />
-        With <span className="text-blue-700 text-lg md:text-8xl">TRICODE</span>
+        With <span className="text-purple-600 text-lg md:text-8xl">TRICODE</span>
       </motion.h1>
   
       <motion.p

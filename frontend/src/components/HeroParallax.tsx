@@ -1,7 +1,7 @@
 import { HeroParallaxDemo } from "./ui/HeroparallaxDemo.tsx"
 
 export function HeroParallax() {
-    return <HeroParallaxDemo  products={products} />;
+    return <HeroParallaxDemo   products={products} />;
   }
   export const products = [
     {

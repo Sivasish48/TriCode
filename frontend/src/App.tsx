@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      {/* Conditionally render Header if the path is not "/" */}
+     
       {location.pathname !== '/' && <Header />}
       
       <Routes>

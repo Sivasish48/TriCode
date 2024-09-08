@@ -3,7 +3,13 @@ import { motion } from 'framer-motion';
 import { Spotlight } from '../components/ui/spotlight';
 import MagicButton from '../components/ui/Magicbutton';
 import { HeroParallax } from '../components/HeroParallax';
+import { useNavigate } from 'react-router-dom';
+import { ContainScroll } from '../components/ContainerScroll';
 const Landing: React.FC = () => {
+
+  const navigate = useNavigate();
+
+  
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black">
     <div className="absolute inset-0 bg-gradient-radial from-transparent to-blue-900/50" />
@@ -17,7 +23,7 @@ const Landing: React.FC = () => {
             whileTap={{ scale: 0.9, rotate: 2 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <a href={`#${item.toLowerCase()}`} className="hover:text-blue-700 transition-colors text-lg">
+            <a href={`#${item.toLowerCase()}`} className="hover:text-purple-500 transition-colors text-lg">
               {item}
             </a>
           </motion.li>
@@ -35,7 +41,7 @@ const Landing: React.FC = () => {
         transition={{ delay: 0.1, type: 'spring', stiffness: 200 }}
       >
         Master the Art of Code <br />
-        With <span className="text-purple-600 text-lg md:text-8xl">TRICODE</span>
+        With <span className="text-purple-500 text-lg md:text-8xl">TRICODE</span>
       </motion.h1>
   
       <motion.p
@@ -47,13 +53,19 @@ const Landing: React.FC = () => {
         An Online Collaborative Coding Platform
       </motion.p>
   
-      <MagicButton title="Try Now" icon={<span className="text-white">➔</span>} position="left" />
+      <MagicButton 
+      title="Try Now" 
+      icon={<span className="text-white border-color-pink">➔</span>} 
+      position="left" 
+      onClick={():void => navigate('/home')}
+    />
     </div>
   
     <HeroParallax />
     <div>
       <div className="flex flex-col items-center justify-center min-h-screen text-center px-4 relative z-10"></div>
     </div>
+    <ContainScroll />
   </div>
   );
 };

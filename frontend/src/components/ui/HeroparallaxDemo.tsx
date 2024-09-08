@@ -115,7 +115,7 @@ const Header = () => {
     >
       <h1 className="text-2xl md:text-7xl font-bold text-white mb-6">
         Experience the Future of{" "}
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+        <span className="bg-clip-text text-transparent bg-purple-700">
           Collaborative Coding
         </span>
       </h1>

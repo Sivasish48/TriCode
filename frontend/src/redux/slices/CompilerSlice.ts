@@ -4,9 +4,9 @@ export interface compilerSliceStateType {
     fullCode: {
         html: string;
         css: string;
-        javascript: string;  // Use 'js' instead of 'javascript'
+        javascript: string;  
     };
-    currentLanguage: "html" | "css" | "javascript";  // Match with keys in `fullCode`
+    currentLanguage: "html" | "css" | "javascript"; 
    
 }
 
@@ -14,7 +14,7 @@ const initialState: compilerSliceStateType = {
     fullCode: {
         html: "this is html code",
         css: "this is css code",
-        javascript: "this is js code",  // Ensure 'js' is used as the key
+        javascript: "this is js code",  
     },
     currentLanguage: "html",
    
@@ -29,7 +29,7 @@ const compilerSlice = createSlice({
         },
         updateCodevalue: (state, action: PayloadAction<string>) => {
             
-            state.fullCode[state.currentLanguage] =action.payload;  // Now TypeScript understands this correctly
+            state.fullCode[state.currentLanguage] =action.payload;  
         },
        
     }

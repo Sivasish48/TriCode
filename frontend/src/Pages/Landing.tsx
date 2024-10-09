@@ -3,7 +3,11 @@ import { motion } from 'framer-motion';
 import MagicButton from '../components/ui/Magicbutton';
 import GradualSpacing from '../components/ui/gradualSpacing';
 import { Tabs } from "../components/ui/tabs";
-
+import { TabContent } from "../components/TabContent";
+import html from "../../public/html.png";
+import css from "../../public/css.png";
+import js from "../../public/js.png";
+import output from "../../public/output.png";
 const Landing: React.FC = () => {
   const tabs = [
     {
@@ -12,7 +16,7 @@ const Landing: React.FC = () => {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
           <p>Product Tab</p>
-          <DummyContent />
+          <TabContent imageUrl={html} /> {/* Pass image for Product tab */}
         </div>
       ),
     },
@@ -22,7 +26,7 @@ const Landing: React.FC = () => {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
           <p>Services tab</p>
-          <DummyContent />
+          <TabContent imageUrl={css} /> {/* Pass image for Services tab */}
         </div>
       ),
     },
@@ -32,7 +36,7 @@ const Landing: React.FC = () => {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
           <p>Playground tab</p>
-          <DummyContent />
+          <TabContent imageUrl={js} /> {/* Pass image for Playground tab */}
         </div>
       ),
     },
@@ -42,7 +46,7 @@ const Landing: React.FC = () => {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
           <p>Content tab</p>
-          <DummyContent />
+          <TabContent imageUrl={output} /> {/* Pass image for Output tab */}
         </div>
       ),
     },
@@ -83,14 +87,3 @@ const Landing: React.FC = () => {
 
 export default Landing;
 
-const DummyContent = () => {
-  return (
-    <img
-      src="/linear.webp"
-      alt="dummy image"
-      width="1000"
-      height="1000"
-      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
-    />
-  );
-};

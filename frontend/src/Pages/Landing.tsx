@@ -14,9 +14,8 @@ const Landing: React.FC = () => {
       title: "First Editor",
       value: "product",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
-          <p>Product Tab</p>
-          <TabContent imageUrl={html} /> {/* Pass image for Product tab */}
+        <div className="w-full h-full relative rounded-xl p-6 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
+          <TabContent imageUrl={html} />
         </div>
       ),
     },
@@ -24,9 +23,8 @@ const Landing: React.FC = () => {
       title: "Second Editor",
       value: "services",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
-          <p>Services tab</p>
-          <TabContent imageUrl={css} /> {/* Pass image for Services tab */}
+        <div className="w-full h-full relative rounded-xl p-6 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
+          <TabContent imageUrl={css} />
         </div>
       ),
     },
@@ -34,9 +32,8 @@ const Landing: React.FC = () => {
       title: "Third Editor",
       value: "playground",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
-          <p>Playground tab</p>
-          <TabContent imageUrl={js} /> {/* Pass image for Playground tab */}
+        <div className="w-full h-full relative rounded-xl p-6 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
+          <TabContent imageUrl={js} />
         </div>
       ),
     },
@@ -44,23 +41,21 @@ const Landing: React.FC = () => {
       title: "Output",
       value: "content",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
-          <p>Content tab</p>
-          <TabContent imageUrl={output} /> {/* Pass image for Output tab */}
+        <div className="w-full h-full relative rounded-xl p-6 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-[#1f1f3f] to-black">
+          <TabContent imageUrl={output} />
         </div>
       ),
     },
   ];
+
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#393BB2] via-[#1f1f3f] to-black"> {/* Updated gradient */}
-      {/* Main content */}
+    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#393BB2] via-[#1f1f3f] to-black">
       <div className="flex flex-col items-center justify-center text-white text-4xl font-semibold font-nunito-sans min-h-screen text-center px-4 relative z-10">
         Master The Art Of Code
         <GradualSpacing
           className="font-nunito-sans text-center text-4xl font-semibold tracking-[-0.1em] text-white dark:text-white md:text-7xl md:leading-[5rem]"
           text=" With TRICODE"
         />
-
         <motion.p
           className="text-gray-500 mb-8 text-lg md:text-xl"
           initial={{ opacity: 0, x: -30 }}
@@ -70,20 +65,16 @@ const Landing: React.FC = () => {
           An Online Collaborative Coding Platform
         </motion.p>
 
-        <MagicButton
-          title="Try Now"
-          icon={<span className="text-white border-color-pink">➔</span>}
-          position="left"
-        />
+        <MagicButton title="Try Now" icon={<span className="text-white border-color-pink">➔</span>} position="left" />
       </div>
-      
-      <div className="h-[20rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full  items-center justify-center my-40">
-      <Tabs tabs={tabs} />
-    </div>
-     
+
+      <div className="h-[40rem] relative flex flex-col max-w-5xl mx-auto w-full items-center justify-center my-40">
+        <Tabs tabs={tabs} />
+      </div>
     </div>
   );
 };
 
 export default Landing;
+
 

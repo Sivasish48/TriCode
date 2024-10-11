@@ -9,6 +9,7 @@ import css from "../../public/css.png";
 import js from "../../public/js.png";
 import output from "../../public/output.png";
 import { BackgroundBeamsWithCollision } from '../components/ui/background-beams-with-collision';
+import {WordPullUp} from "../components/ui/words-pull-up";
 
 const Landing: React.FC = () => {
   const tabs = [
@@ -86,6 +87,12 @@ const Landing: React.FC = () => {
      Start Coding Together Now
         </h1>
   <Tabs tabClassName="py-4"tabs={tabs} />
+</div>
+<div>
+  <WordPullUp
+  className="relative z-6 text-md md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold pb-10"
+  words="Share, Save, Code From Anywhere"
+/>
 </div>
 </div>
 </div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import cn  from "./../../lib/utils";
+import cn from "./../../lib/utils";
 
 type Tab = {
   title: string;
@@ -38,9 +38,10 @@ export const Tabs = ({
 
   return (
     <div className={cn("flex flex-col items-center justify-center w-full space-y-4", containerClassName)}>
+      {/* Navigation container with black background */}
       <div
         className={cn(
-          "flex flex-row items-center justify-center space-x-4 overflow-x-auto no-visible-scrollbar max-w-full",
+          "flex flex-row items-center justify-center space-x-4 overflow-x-auto no-visible-scrollbar max-w-full bg-black p-4 rounded-lg",
           containerClassName
         )}
       >
@@ -66,7 +67,9 @@ export const Tabs = ({
           </button>
         ))}
       </div>
-      <div className="w-full h-[500px] md:h-[600px] lg:h-[700px] rounded-xl overflow-hidden">
+
+      {/* Content area */}
+      <div className="w-full h-[500px] md:h-[600px] lg:h-[700px] rounded-xl overflow-hidden relative">
         {propTabs.map((tab, idx) => (
           <motion.div
             key={tab.value}

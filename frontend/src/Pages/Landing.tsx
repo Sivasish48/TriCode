@@ -8,6 +8,8 @@ import html from "../../public/html.png";
 import css from "../../public/css.png";
 import js from "../../public/js.png";
 import output from "../../public/output.png";
+import { BackgroundBeamsWithCollision } from '../components/ui/background-beams-with-collision';
+
 const Landing: React.FC = () => {
   const tabs = [
     {
@@ -49,7 +51,9 @@ const Landing: React.FC = () => {
   ];
 
   return (
+    <div>
     <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#393BB2] via-[#1f1f3f] to-black">
+      <BackgroundBeamsWithCollision>
       <div className="flex flex-col items-center justify-center text-white text-4xl font-semibold font-nunito-sans min-h-screen text-center px-4 relative z-10">
         Master The Art Of Code
         <GradualSpacing
@@ -67,11 +71,16 @@ const Landing: React.FC = () => {
 
         <MagicButton title="Try Now" icon={<span className="text-white border-color-pink">➔</span>} position="left" />
       </div>
-
-      <div className="h-[40rem] relative flex flex-col max-w-5xl mx-auto w-full items-center justify-center my-40">
-        <Tabs tabs={tabs} />
-      </div>
-    </div>
+      </BackgroundBeamsWithCollision>
+      
+</div>
+<div className='bg-black'>
+<div className="h-[40rem] relative flex flex-col max-w-5xl mx-auto w-full items-center justify-center my-0 bg-black">
+  <Tabs tabs={tabs} />
+</div>
+</div>
+</div>
+ 
   );
 };
 

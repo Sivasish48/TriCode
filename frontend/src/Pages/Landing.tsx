@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import MagicButton from "../components/ui/Magicbutton";
-import GradualSpacing from "../components/ui/gradualSpacing";
+
 import { Tabs } from "../components/ui/tabs";
 import { TabContent } from "../components/TabContent";
 import html from "../../public/html.png";
@@ -13,7 +13,9 @@ import { WordPullUp } from "../components/ui/words-pull-up";
 import { ShineBorder } from "../components/ui/shine-border";
 import { Meteors } from "../components/ui/meteors";
 import  DotPattern  from "../components/ui/dot-pattern";
+import ShimmerButton from "../components/ui/shimmer-button";
 import  cn  from "../lib/utils";
+import SparklesText from "../components/ui/sparkles-text";
 
 const Landing: React.FC = () => {
   const tabs = [
@@ -57,35 +59,44 @@ const Landing: React.FC = () => {
 
   return (
     <div>
-      <div className="relative h-full w-full overflow-hidden bg-gradient-to-b from-[#393BB2] via-[#1f1f3f] to-black">
-        <BackgroundBeamsWithCollision>
-          {/* Main Heading with tighter spacing */}
-          <div className="relative z-10 text-3xl md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold leading-tight md:leading-snug">
-            Master The Art Of Code
-            <GradualSpacing
-              className="relative z-10 text-3xl md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold leading-tight md:leading-snug"
-              text=" With TRICODE"
-            />
-            {/* Subtitle with tighter spacing */}
-            <motion.p
-              className="relative z-10 text-base md:text-xl lg:text-2xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-semibold mt-2 md:mt-4"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, type: "spring", stiffness: 300 }}
-            >
-              An Online Collaborative Coding Platform
-            </motion.p>
-            {/* Button with compact margin */}
-            <div className="mt-6 lg:mt-8">
-              <MagicButton
-                title="Try Now"
-                icon={<span className="text-white border-color-pink">➔</span>}
-                position="left"
-              />
-            </div>
-          </div>
-        </BackgroundBeamsWithCollision>
+<div className="relative h-full w-full overflow-hidden bg-gradient-to-b from-[#393BB2] via-[#1f1f3f] to-black">
+  <BackgroundBeamsWithCollision>
+    {/* Main Heading with tighter spacing */}
+    <div className="relative z-10 text-center font-sans font-bold leading-tight md:leading-snug">
+      <h1 className="text-3xl md:text-5xl lg:text-6xl bg-clip-text text-white">
+        Master The Art Of Code With
+      </h1>
+
+      {/* Apply sparkles effect only to "Tricode" */}
+      <SparklesText
+        className="text-3xl md:text-5xl lg:text-6xl bg-clip-text text-white"
+        text="Tricode"
+        sparklesCount={12}
+      />
+
+      {/* Subtitle with tighter spacing */}
+      <motion.p
+        className="relative z-10 text-base md:text-xl lg:text-2xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 font-semibold mt-2 md:mt-4"
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.6, type: "spring", stiffness: 300 }}
+      >
+        An Online Collaborative Coding Platform
+      </motion.p>
+
+      {/* Button with compact margin */}
+      <div className="mt-6 lg:mt-8">
+        <MagicButton
+          title="Try Now"
+          icon={<span className="text-white border-color-pink">➔</span>}
+          position="left"
+        />
       </div>
+    </div>
+  </BackgroundBeamsWithCollision>
+</div>
+
+
 
       <div className="bg-black ">
         <div className="h-[70rem] relative flex flex-col max-w-5xl mx-auto w-full items-center justify-center  bg-black p-12">
@@ -159,10 +170,17 @@ const Landing: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-lack md:shadow-xl">
-      <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-white ">
-        Dot Pattern
-      </p>
+        <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-black">
+        <h1 className="relative z-6 text-md md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold pb-10">
+            What are you waiting for?
+          </h1>
+        <div className="z-10 flex min-h-64 items-center justify-center">
+      <ShimmerButton className="shadow-2xl">
+        <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none text-blue-400 dark:from-white dark:to-slate-900/10 lg:text-lg">
+         Start Coding
+        </span>
+      </ShimmerButton>
+    </div>
       <DotPattern
         className={cn(
           "[mask-image:radial-gradient(300px_circle_at_center,purple,transparent)]",

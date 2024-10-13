@@ -84,6 +84,7 @@ export default {
           to: {
             backgroundPosition: "-200% 0",
           },
+          
         },
 
         meteor: {

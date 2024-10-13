@@ -16,6 +16,7 @@ import  DotPattern  from "../components/ui/dot-pattern";
 import ShimmerButton from "../components/ui/shimmer-button";
 import  cn  from "../lib/utils";
 import SparklesText from "../components/ui/sparkles-text";
+import Footer from "../components/footer";
 
 const Landing: React.FC = () => {
   const tabs = [
@@ -188,6 +189,7 @@ const Landing: React.FC = () => {
       />
     </div>
       </div>
+      <Footer/>
     </div>
   );
 };

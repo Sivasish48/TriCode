@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import MagicButton from "../components/ui/Magicbutton";
-
 import { Tabs } from "../components/ui/tabs";
 import { TabContent } from "../components/TabContent";
 import html from "../../public/html.png";
@@ -17,8 +16,12 @@ import ShimmerButton from "../components/ui/shimmer-button";
 import  cn  from "../lib/utils";
 import SparklesText from "../components/ui/sparkles-text";
 import Footer from "../components/footer";
+import { useNavigate } from "react-router-dom";
+
 
 const Landing: React.FC = () => {
+
+  const navigate = useNavigate();
   const tabs = [
     {
       title: "First Editor",
@@ -86,7 +89,7 @@ const Landing: React.FC = () => {
       </motion.p>
 
       {/* Button with compact margin */}
-      <div className="mt-6 lg:mt-8">
+      <div className="mt-6 lg:mt-8" onClick={()=>(navigate("/compiler"))}>
         <MagicButton
           title="Try Now"
           icon={<span className="text-white border-color-pink">➔</span>}
@@ -175,7 +178,7 @@ const Landing: React.FC = () => {
         <h1 className="relative z-6 text-md md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold pb-10">
             What are you waiting for?
           </h1>
-        <div className="z-10 flex min-h-64 items-center justify-center">
+        <div className="z-10 flex min-h-64 items-center justify-center" onClick={()=>(navigate("/compiler"))}>
       <ShimmerButton className="shadow-2xl">
         <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none text-blue-400 dark:from-white dark:to-slate-900/10 lg:text-lg">
          Start Coding

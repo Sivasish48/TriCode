@@ -1,6 +1,8 @@
 import express from "express";
-import { saveCode } from "../controllers/ompilerController";
-export const router = express.Router();
+import { saveCode } from "../controllers/compilerController";
+export const compilerRouter = express.Router();
 
-
-router.post("/compiler", saveCode);
+compilerRouter.post("/save", async (req, res) => {
+    await saveCode(req as any, res as any);
+  });
+  

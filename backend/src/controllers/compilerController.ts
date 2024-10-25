@@ -17,7 +17,7 @@ export const saveCode = async (req: Request, res: Response): Promise<Response> =
     });
     
     console.log(newCode);
-    return res.status(200).json({ message: "Code saved successfully", newCode });
+    return res.status(200).json({ message: "Code saved successfully", newCode,url:newCode._id});
   } catch (error) {
     console.error(`Error in saving code: ${error}`);
     return res.status(500).json({ error: "Error in saving code" });

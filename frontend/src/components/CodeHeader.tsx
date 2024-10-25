@@ -10,11 +10,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentLanguage } from "../redux/slices/CompilerSlice";
 import { RootState } from "../redux/store";
 import { compilerSliceStateType } from "../redux/slices/CompilerSlice";
-import { useToast } from "../hooks/use-toast";
+// import { useToast } from "../hooks/use-toast";
 //import { handleError } from "../error/handleError";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
 function CodeHeader() {
+  const navigate = useNavigate();
+  // const {urlId} = useParams()
+  // console.log("URL ID: ",urlId)
+  
   const dispatch = useDispatch();
   const currentLanguage = useSelector(
     (state: RootState) => state.compilerSlice.currentLanguage
@@ -34,6 +41,7 @@ function CodeHeader() {
         }
       });
       console.log("Response: ", response.data);
+      navigate(response.data.url);
     } catch (error) {
       console.error(error);
     }

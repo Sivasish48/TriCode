@@ -19,6 +19,7 @@ function App () {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/compiler" element={<Compiler />} />
+        <Route path="/compiler/:urlId" element={<Compiler />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />

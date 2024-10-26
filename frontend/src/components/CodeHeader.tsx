@@ -10,29 +10,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentLanguage } from "../redux/slices/CompilerSlice";
 import { RootState } from "../redux/store";
 import { compilerSliceStateType } from "../redux/slices/CompilerSlice";
-// import { useToast } from "../hooks/use-toast";
-//import { handleError } from "../error/handleError";
 import { useNavigate } from "react-router-dom";
-
+import { Loader } from "lucide-react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 function CodeHeader() {
   const navigate = useNavigate();
-  // const {urlId} = useParams()
-  // console.log("URL ID: ",urlId)
-  
+  const [saveLoading, setSaveLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const currentLanguage = useSelector(
     (state: RootState) => state.compilerSlice.currentLanguage
   );
-  // const { toast } = useToast();
   const fullCode = useSelector((state: RootState) => state.compilerSlice.fullCode);
-  console.log("Full Code: ", fullCode);
-  const handleSave = async () => {
-    try {
-     
   
+  console.log("Full Code: ", fullCode);
+  
+  const handleSave = async () => {
+    setSaveLoading(true); // Start loading
+    try {
       const response = await axios.post("http://localhost:5000/compiler/save", {
         fullCode: {
           html: fullCode.html,
@@ -41,33 +37,42 @@ function CodeHeader() {
         }
       });
       console.log("Response: ", response.data);
-      navigate(response.data.url);
+      navigate(`/compiler/${response.data.url}`, { replace: true });
     } catch (error) {
       console.error(error);
+    } finally {
+      setSaveLoading(false); // Stop loading
     }
   };
-  
-  
 
   return (
     <div className="h-[50px] bg-transparent text-white flex justify-end items-center px-4">
       <div className="flex items-center gap-4">
         <Button
-        onClick={handleSave}
+          onClick={handleSave}
           variant="ghost"
           size="icon"
-          className="rounded-full hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-110"
+          className="rounded-full hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-in-out transform hover:scale-110"
         >
-          <SaveIcon className="w-5 h-5" />
-          <span className="sr-only">Save</span>
+          {saveLoading ? (
+            <Loader className="animate-spin" />
+           
+          ) : (
+            <>
+            <SaveIcon className="w-5 h-5" />
+            
+            </>
+          )}
         </Button>
+
         <Button
           variant="outline"
-          className="rounded-full  bg-transparent text-white hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:border-none hover:text-white transition-all duration-300 ease-in-out transform hover:scale-110"
+          className="rounded-full bg-transparent text-white hover:bg-gradient-to-r from-purple-500 to-pink-500 hover:border-none transition-all duration-300 ease-in-out transform hover:scale-110"
         >
           <ShareIcon className="w-5 h-5 mr-2" />
           <span>Share</span>
         </Button>
+
         <div>
           <Select
             defaultValue={currentLanguage}
@@ -85,26 +90,25 @@ function CodeHeader() {
             <SelectContent className="bg-dark text-white">
               <SelectItem
                 value="html"
-                className="bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white"
+                className="bg-dark text-white hover:bg-dark/90 focus:bg-white"
               >
                 HTML
               </SelectItem>
               <SelectItem
                 value="css"
-                className="bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white"
+                className="bg-dark text-white hover:bg-dark/90 focus:bg-white"
               >
                 CSS
               </SelectItem>
               <SelectItem
                 value="javascript"
-                className="bg-dark text-white hover:bg-dark/90 hover:text-white focus:bg-dark focus:text-white"
+                className="bg-dark text-white hover:bg-dark/90 focus:bg-white"
               >
                 JAVASCRIPT
               </SelectItem>
             </SelectContent>
           </Select>
         </div>
-        <div></div>
       </div>
     </div>
   );

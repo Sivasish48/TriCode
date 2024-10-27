@@ -23,3 +23,22 @@ export const saveCode = async (req: Request, res: Response): Promise<Response> =
     return res.status(500).json({ error: "Error in saving code" });
   }
 };
+
+
+export const loadCode = async (req: Request , res: Response) =>{
+  try {
+    const {urlId} = req.body;
+    if (urlId){
+      const existingCode = await Code.findById(urlId);
+      if (!existingCode){
+        return res.status(404).json({ error: "Code not found" });
+      }
+      else {
+        return res.status(200).json({ message: "Code loaded successfully", fullCode:existingCode.fullCode });
+      }
+  }
+  } catch (error) {
+    console.error(`Error in loading code: ${error}`);
+    return res.status(500).json({ error: "Error in loading code" });
+  }
+}

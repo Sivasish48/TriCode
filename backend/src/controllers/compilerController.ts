@@ -17,28 +17,34 @@ export const saveCode = async (req: Request, res: Response): Promise<Response> =
     });
     
     console.log(newCode);
-    return res.status(200).json({ message: "Code saved successfully", newCode,url:newCode._id});
+    return res.status(200).json({ message: "Code saved successfully", fullCode ,url:newCode._id});
   } catch (error) {
     console.error(`Error in saving code: ${error}`);
     return res.status(500).json({ error: "Error in saving code" });
   }
 };
 
+import mongoose from 'mongoose';
 
-export const loadCode = async (req: Request , res: Response) =>{
+export const loadCode = async (req: Request, res: Response) => {
   try {
-    const {urlId} = req.body;
-    if (urlId){
-      const existingCode = await Code.findById(urlId);
-      if (!existingCode){
-        return res.status(404).json({ error: "Code not found" });
-      }
-      else {
-        return res.status(200).json({ message: "Code loaded successfully", fullCode:existingCode.fullCode });
-      }
-  }
+    const { urlId } = req.body;
+
+    // Check if urlId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(urlId)) {
+      return res.status(400).json({ error: "Invalid URL ID format" });
+    }
+
+    const existingCode = await Code.findById(urlId);
+
+    if (!existingCode) {
+      return res.status(404).json({ error: "Code not found" });
+    } else {
+      return res.status(200).json({ message: "Code loaded successfully", fullCode: existingCode.fullCode });
+    }
+
   } catch (error) {
     console.error(`Error in loading code: ${error}`);
     return res.status(500).json({ error: "Error in loading code" });
   }
-}
+};

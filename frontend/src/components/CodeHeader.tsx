@@ -7,15 +7,17 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCurrentLanguage } from "../redux/slices/CompilerSlice";
+import { updateCurrentLanguage, updateFullCode } from "../redux/slices/CompilerSlice";
 import { RootState } from "../redux/store";
 import { compilerSliceStateType } from "../redux/slices/CompilerSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Loader } from "lucide-react";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function CodeHeader() {
+  const {urlId} = useParams()
+
   const navigate = useNavigate();
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -25,6 +27,20 @@ function CodeHeader() {
   const fullCode = useSelector((state: RootState) => state.compilerSlice.fullCode);
   
   console.log("Full Code: ", fullCode);
+
+  const loadCode = async ()=>{
+    try {
+      const response = await axios.post("http://localhost:5000/compiler/load",{
+        urlId: urlId,
+      })
+      dispatch(updateFullCode(response.data.fullCode));
+      console.log("Response: ", response.data);
+    } catch (error) {
+      console.log("error is " +error); 
+
+    }
+  }
+
   
   const handleSave = async () => {
     setSaveLoading(true); // Start loading
@@ -45,6 +61,12 @@ function CodeHeader() {
     }
   };
 
+  useEffect(()=>{
+    if (urlId) {
+      loadCode();
+    }
+    
+  },[urlId])
   return (
     <div className="h-[50px] bg-transparent text-white flex justify-end items-center px-4">
       <div className="flex items-center gap-4">

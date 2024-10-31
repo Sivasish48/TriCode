@@ -35,6 +35,7 @@ function CodeHeader() {
 
   const navigate = useNavigate();
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
+  const [shareBtn,setShareBtn] = useState<boolean>(false);
   const dispatch = useDispatch();
   const currentLanguage = useSelector(
     (state: RootState) => state.compilerSlice.currentLanguage
@@ -79,8 +80,13 @@ function CodeHeader() {
   useEffect(() => {
     if (urlId) {
       loadCode();
+      setShareBtn(true);
+    }else{
+      setShareBtn(false);
     }
   }, [urlId]);
+
+ 
   return (
     <div className="h-[50px] bg-transparent text-white flex justify-end items-center px-4">
       <div className="flex items-center gap-4">
@@ -98,7 +104,7 @@ function CodeHeader() {
             </>
           )}
         </Button>
-
+{shareBtn && (
         <AlertDialog>
           <AlertDialogTrigger className="flex flex-row gap-2 p-4 py-2 border border-solid border-2 border-white hover:border-none rounded-full hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:text-black transition-all duration-300 ease-in-out transform hover:scale-110">
             <ShareIcon className="w-5 h-5" />
@@ -138,6 +144,8 @@ function CodeHeader() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+)
+}
 
         <div>
           <Select

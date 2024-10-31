@@ -27,6 +27,8 @@ import {
 } from "../components/ui/alert-dialog";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+
 
 function CodeHeader() {
   const { urlId } = useParams();
@@ -121,6 +123,7 @@ function CodeHeader() {
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(window.location.href);
+                    toast("URL has been Copied to clipboard!");
                   }}
                   className="p-2 rounded-full bg-gray-800 hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-in-out transform hover:scale-110"
                 >

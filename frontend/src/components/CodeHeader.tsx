@@ -7,16 +7,29 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCurrentLanguage, updateFullCode } from "../redux/slices/CompilerSlice";
+import {
+  updateCurrentLanguage,
+  updateFullCode,
+} from "../redux/slices/CompilerSlice";
 import { RootState } from "../redux/store";
 import { compilerSliceStateType } from "../redux/slices/CompilerSlice";
 import { useNavigate, useParams } from "react-router-dom";
-import { Loader } from "lucide-react";
+import { Code, Loader, Copy } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../components/ui/alert-dialog";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 function CodeHeader() {
-  const {urlId} = useParams()
+  const { urlId } = useParams();
 
   const navigate = useNavigate();
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
@@ -24,24 +37,24 @@ function CodeHeader() {
   const currentLanguage = useSelector(
     (state: RootState) => state.compilerSlice.currentLanguage
   );
-  const fullCode = useSelector((state: RootState) => state.compilerSlice.fullCode);
-  
+  const fullCode = useSelector(
+    (state: RootState) => state.compilerSlice.fullCode
+  );
+
   console.log("Full Code: ", fullCode);
 
-  const loadCode = async ()=>{
+  const loadCode = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/compiler/load",{
+      const response = await axios.post("http://localhost:5000/compiler/load", {
         urlId: urlId,
-      })
+      });
       dispatch(updateFullCode(response.data.fullCode));
       console.log("Response: ", response.data);
     } catch (error) {
-      console.log("error is " +error); 
-
+      console.log("error is " + error);
     }
-  }
+  };
 
-  
   const handleSave = async () => {
     setSaveLoading(true); // Start loading
     try {
@@ -50,7 +63,7 @@ function CodeHeader() {
           html: fullCode.html,
           css: fullCode.css,
           javascript: fullCode.javascript,
-        }
+        },
       });
       console.log("Response: ", response.data);
       navigate(`/compiler/${response.data.url}`, { replace: true });
@@ -61,12 +74,11 @@ function CodeHeader() {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (urlId) {
       loadCode();
     }
-    
-  },[urlId])
+  }, [urlId]);
   return (
     <div className="h-[50px] bg-transparent text-white flex justify-end items-center px-4">
       <div className="flex items-center gap-4">
@@ -74,26 +86,55 @@ function CodeHeader() {
           onClick={handleSave}
           variant="ghost"
           size="icon"
-          className="rounded-full hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-in-out transform hover:scale-110"
+          className="rounded-full border border-solid border-2 border-white hover:border-none hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-in-out transform hover:scale-110"
         >
           {saveLoading ? (
             <Loader className="animate-spin" />
-           
           ) : (
             <>
-            <SaveIcon className="w-5 h-5" />
-            
+              <SaveIcon className="w-5 h-5" />
             </>
           )}
         </Button>
 
-        <Button
-          variant="outline"
-          className="rounded-full bg-transparent text-white hover:bg-gradient-to-r from-purple-500 to-pink-500 hover:border-none transition-all duration-300 ease-in-out transform hover:scale-110"
-        >
-          <ShareIcon className="w-5 h-5 mr-2" />
-          <span>Share</span>
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger className="flex flex-row gap-2 p-4 py-2 border border-solid border-2 border-white hover:border-none rounded-full hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:text-black transition-all duration-300 ease-in-out transform hover:scale-110">
+            <ShareIcon className="w-5 h-5" />
+            <span>Share</span>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="bg-black text-white border border-gray-700 rounded-lg shadow-lg">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="flex flex-row gap-2 items-center justify-center text-purple-500">
+                <Code />
+                Share Your Code!
+                <Code />
+              </AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogDescription>
+              <div className="flex items-center gap-2 mt-4">
+                <input
+                  type="text"
+                  value={window.location.href}
+                  readOnly
+                  className="w-full px-4 py-2 rounded bg-gray-800 text-white border border-gray-500 focus:outline-none"
+                />
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                  }}
+                  className="p-2 rounded-full bg-gray-800 hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-in-out transform hover:scale-110"
+                >
+                  <Copy className="w-5 h-5" />
+                </button>
+              </div>
+            </AlertDialogDescription>
+            <AlertDialogFooter className="mt-4">
+              <AlertDialogCancel className="px-4 py-2 rounded bg-gray-800 hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-in-out transform hover:scale-110">
+                Cancel
+              </AlertDialogCancel>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
 
         <div>
           <Select
